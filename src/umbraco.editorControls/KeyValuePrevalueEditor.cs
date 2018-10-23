@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -52,13 +52,15 @@ namespace umbraco.editorControls
             setupChildControls();
 
             // Bootstrap delete.
-			if (System.Web.HttpContext.Current.Request["delete"] != null) {
+            if (System.Web.HttpContext.Current.Request["delete"] != null)
+            {
                 DeletePrevalue(int.Parse(System.Web.HttpContext.Current.Request["delete"]));
             }
 
         }
 
-		private void DeletePrevalue(int id) {
+        private void DeletePrevalue(int id)
+        {
             using (var sqlHelper = Application.SqlHelper)
                 sqlHelper.ExecuteNonQuery("delete from cmsDataTypePreValues where id = " + id);
         }
@@ -87,7 +89,8 @@ namespace umbraco.editorControls
             _dropdownlist.Items.Add(DBTypes.Nvarchar.ToString());
         }
 
-        protected override void OnInit(EventArgs e) {
+        protected override void OnInit(EventArgs e)
+        {
             base.OnInit(e);
 
 
@@ -129,22 +132,22 @@ namespace umbraco.editorControls
             }
         }
 
-		public void Save() 
-		{
+        public void Save()
+        {
             _datatype.DBType = (cms.businesslogic.datatype.DBTypes)Enum.Parse(typeof(cms.businesslogic.datatype.DBTypes), _dropdownlist.SelectedValue, true);
-			
+
             //changes in name and sortorder
             if (!string.IsNullOrEmpty(_tbhidden.Text))
             {
                 int so = 0;
-                foreach (string row in _tbhidden.Text.Split('�'))
+                foreach (string row in _tbhidden.Text.Split('¶'))
                 {
                     if (!string.IsNullOrEmpty(row))
                     {
-                     
+
                         int id = 0;
 
-                        if (row.Split('|').Length == 2 &&  int.TryParse(row.Split('|')[0], out id) && row.Split('|')[1].Length > 0)
+                        if (row.Split('|').Length == 2 && int.TryParse(row.Split('|')[0], out id) && row.Split('|')[1].Length > 0)
                         {
                             using (var sqlHelper = Application.SqlHelper)
                             {
@@ -164,8 +167,8 @@ namespace umbraco.editorControls
             }
 
             // If the add new prevalue textbox is filled out - add the value to the collection.
-			if (_textbox.Text != "") 
-			{
+            if (_textbox.Text != "")
+            {
 
                 int so = -1;
 
@@ -186,11 +189,11 @@ namespace umbraco.editorControls
                                     sqlHelper.CreateParameter("@so",so)};
                     sqlHelper.ExecuteNonQuery("insert into cmsDataTypePreValues (datatypenodeid,[value],sortorder,alias) values (@dtdefid,@value,@so,'')", SqlParams);
                 }
-				_textbox.Text = "";
+                _textbox.Text = "";
 
                 ScriptManager.GetCurrent(Page).SetFocus(_textbox);
-			}
-		}
+            }
+        }
 
         protected override void Render(HtmlTextWriter writer)
         {
@@ -199,7 +202,8 @@ namespace umbraco.editorControls
             writer.Write("<br style='clear: both'/></div>");
 
             List<KeyValuePair<int, String>> _prevalues = PrevaluesAsKeyValuePairList;
-            if (_prevalues.Count > 0) {
+            if (_prevalues.Count > 0)
+            {
                 writer.Write("<div class='propertyItem'><table style='width: 100%' id=\"prevalues\">");
                 writer.Write("<tr class='header'><th style='width: 15%'>Text</th><td colspan='2'>Value</td></tr>");
 
@@ -219,7 +223,8 @@ namespace umbraco.editorControls
 
         }
 
-        public SortedList Prevalues {
+        public SortedList Prevalues
+        {
             get
             {
                 SortedList retval = new SortedList();

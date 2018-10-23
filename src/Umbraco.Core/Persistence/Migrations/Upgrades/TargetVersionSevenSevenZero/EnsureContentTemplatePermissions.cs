@@ -1,4 +1,4 @@
-using System.Linq;
+ï»¿using System.Linq;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models.Rdbms;
 using Umbraco.Core.Persistence.SqlSyntax;
@@ -28,9 +28,9 @@ namespace Umbraco.Core.Persistence.Migrations.Upgrades.TargetVersionSevenSevenZe
 
                 foreach (var userGroup in userGroups)
                 {
-                    if (userGroup.DefaultPermissions.Contains('ï') == false)
+                    if (userGroup.DefaultPermissions.Contains('Ã¯') == false)
                     {
-                        userGroup.DefaultPermissions += "ï";
+                        userGroup.DefaultPermissions += "Ã¯";
                         localContext.Update.Table("umbracoUserGroup")
                             .Set(new { userGroupDefaultPermissions = userGroup.DefaultPermissions })
                             .Where(new { id = userGroup.Id });
@@ -39,11 +39,11 @@ namespace Umbraco.Core.Persistence.Migrations.Upgrades.TargetVersionSevenSevenZe
 
                 return localContext.GetSql();
             });
-            
+
         }
 
         public override void Down()
-        {            
+        {
         }
     }
 }

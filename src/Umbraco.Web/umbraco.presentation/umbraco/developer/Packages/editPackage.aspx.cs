@@ -48,10 +48,10 @@ namespace umbraco.presentation.developer.packages
 
                 cp = new ContentPicker();
                 content.Controls.Add(cp);
-                
+
                 if (string.IsNullOrEmpty(pack.PackagePath) == false)
                 {
-                    packageUmbFile.Text = " &nbsp; <a href='" + Page.ResolveClientUrl(pack.PackagePath) + "'>Download</a>";                    
+                    packageUmbFile.Text = " &nbsp; <a href='" + Page.ResolveClientUrl(pack.PackagePath) + "'>Download</a>";
                 }
                 else
                 {
@@ -164,7 +164,7 @@ namespace umbraco.presentation.developer.packages
                     cms.businesslogic.datatype.DataTypeDefinition[] umbDataType = cms.businesslogic.datatype.DataTypeDefinition.GetAll();
 
                     // sort array by name
-                    Array.Sort(umbDataType, delegate(cms.businesslogic.datatype.DataTypeDefinition umbDataType1, cms.businesslogic.datatype.DataTypeDefinition umbDataType2)
+                    Array.Sort(umbDataType, delegate (cms.businesslogic.datatype.DataTypeDefinition umbDataType1, cms.businesslogic.datatype.DataTypeDefinition umbDataType2)
                     {
                         return umbDataType1.Text.CompareTo(umbDataType2.Text);
                     });
@@ -385,13 +385,13 @@ namespace umbraco.presentation.developer.packages
             {
                 string tmpFFFF = ((TextBox)rItem.FindControl("packageFilePath")).Text;
                 if (tmpFFFF.Trim() != "")
-                    tmpFilePathString += tmpFFFF + "ค";
+                    tmpFilePathString += tmpFFFF + "ก่";
             }
 
             cms.businesslogic.packager.CreatedPackage createdPackage = cms.businesslogic.packager.CreatedPackage.GetById(int.Parse(Request.QueryString["id"]));
             cms.businesslogic.packager.PackageInstance pack = createdPackage.Data;
 
-            pack.Files = new List<string>(tmpFilePathString.Trim('ค').Split('ค'));
+            pack.Files = new List<string>(tmpFilePathString.Trim('ก่').Split('ก่'));
             pack.Files.TrimExcess();
 
             createdPackage.Save();

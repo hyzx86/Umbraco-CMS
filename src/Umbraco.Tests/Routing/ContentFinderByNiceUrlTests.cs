@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using NUnit.Framework;
 using Umbraco.Core.Models;
 using Umbraco.Tests.TestHelpers;
@@ -69,8 +69,8 @@ namespace Umbraco.Tests.Routing
         /// <param name="urlString"></param>
         /// <param name="expectedId"></param>
         [TestCase("/", 1046)]
-        [TestCase("/home/sub1/custom-sub-3-with-accént-character", 1179)]
-        [TestCase("/home/sub1/custom-sub-4-with-æøå", 1180)]
+        [TestCase("/home/sub1/custom-sub-3-with-accÃ©nt-character", 1179)]
+        [TestCase("/home/sub1/custom-sub-4-with-Ã¦Ã¸Ã¥", 1180)]
         public void Match_Document_By_Url_With_Special_Characters(string urlString, int expectedId)
         {
             var routingContext = GetRoutingContext(urlString);
@@ -95,8 +95,8 @@ namespace Umbraco.Tests.Routing
         /// <param name="urlString"></param>
         /// <param name="expectedId"></param>
         [TestCase("/", 1046)]
-        [TestCase("/home/sub1/custom-sub-3-with-accént-character", 1179)]
-        [TestCase("/home/sub1/custom-sub-4-with-æøå", 1180)]
+        [TestCase("/home/sub1/custom-sub-3-with-accÃ©nt-character", 1179)]
+        [TestCase("/home/sub1/custom-sub-4-with-Ã¦Ã¸Ã¥", 1180)]
         public void Match_Document_By_Url_With_Special_Characters_Using_Hostname(string urlString, int expectedId)
         {
             var routingContext = GetRoutingContext(urlString);
@@ -122,18 +122,18 @@ namespace Umbraco.Tests.Routing
         /// </summary>
         /// <param name="urlString"></param>
         /// <param name="expectedId"></param>
-        [TestCase("/æøå/", 1046)]
-        [TestCase("/æøå/home/sub1", 1173)]
-        [TestCase("/æøå/home/sub1/custom-sub-3-with-accént-character", 1179)]
-        [TestCase("/æøå/home/sub1/custom-sub-4-with-æøå", 1180)]
+        [TestCase("/Ã¦Ã¸Ã¥/", 1046)]
+        [TestCase("/Ã¦Ã¸Ã¥/home/sub1", 1173)]
+        [TestCase("/Ã¦Ã¸Ã¥/home/sub1/custom-sub-3-with-accÃ©nt-character", 1179)]
+        [TestCase("/Ã¦Ã¸Ã¥/home/sub1/custom-sub-4-with-Ã¦Ã¸Ã¥", 1180)]
         public void Match_Document_By_Url_With_Special_Characters_In_Hostname(string urlString, int expectedId)
         {
             var routingContext = GetRoutingContext(urlString);
             var url = routingContext.UmbracoContext
                 .CleanedUmbracoUrl; //very important to use the cleaned up umbraco url		
             var docreq = new PublishedContentRequest(url, routingContext);
-            docreq.UmbracoDomain = new UmbracoDomain("http://mysite/æøå");
-            docreq.DomainUri = new Uri("http://mysite/æøå");
+            docreq.UmbracoDomain = new UmbracoDomain("http://mysite/Ã¦Ã¸Ã¥");
+            docreq.DomainUri = new Uri("http://mysite/Ã¦Ã¸Ã¥");
             var lookup = new ContentFinderByNiceUrl();
             SettingsForTests.HideTopLevelNodeFromPath = false;
 
